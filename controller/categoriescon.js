@@ -1,19 +1,35 @@
 const Category=require('../models/categoriesmod');
 
 
-exports.getCategories = (req , res, next) => {
-    res.status(200).send({
+exports.getCategories = async (req , res, next) => {
+    try{
+        const categories = await Category.find();
+        res.status(200).send({
         success:true, 
-        data: 'buh categoriudiin medeelel',
-        user: req.userID,
+        data: categories,
     });
+    } catch (err){
+        next(err); 
+    }
 };
 
-exports.getCategory = (req , res, next) => {
-    res.status(200).send({
-        success:true, 
-        data: `${req.params.catid} Id tei categoriig medeellig avna`,
-    });
+exports.getCategory = async (req , res, next) => {
+    try {
+        const category = await Category.findById(req.params.catid);
+        if (category === null){
+            res.status(400).send({
+                success:false, 
+                error: "Sorry this category doesn't exist",
+            }); 
+        }
+        res.status(200).send({
+            success:true, 
+            data: category,
+        });
+    }catch(err){
+        next(err);      
+    }
+
 };
 
 exports.createCategory = async (req , res, next) => {
@@ -27,24 +43,48 @@ exports.createCategory = async (req , res, next) => {
             data: category,
         });
     }catch(err){
-        res.status(400).send({
-            success:false, 
-            error: err,
-        });
+        next(err); 
     }
 
 };
 
-exports.updateCategory = (req , res, next) => {
-    res.status(200).send({
-        success:true, 
-        data: `${req.params.catid} Id tei categori uurchluh`
-    });
+exports.updateCategory = async (req , res, next) => {
+    try {
+        const category = await Category.findByIdAndUpdate(req.params.catid, req.body, {
+            new: true,
+            runValidators: true
+        });
+        if (category === null){
+            res.status(400).send({
+                success:false, 
+                error: "Sorry this category doesn't exist",
+            }); 
+        }
+        res.status(200).send({
+            success:true, 
+            data: category,
+        });
+    }catch(err){
+        next(err);         
+    }
+
 };
 
-exports.deleteCategory = (req , res, next) => {
-    res.status(200).send({
-        success:true, 
-        data: `${req.params.catid} Id tei categoriig ustgana`
-    });
+exports.deleteCategory = async (req , res, next) => {
+    try {
+        const category = await Category.findByIdAndDelete(req.params.catid);
+        if (category === null){
+            res.status(400).send({
+                success:false, 
+                error: "Sorry this category doesn't exist",
+            }); 
+        }
+        res.status(200).send({
+            success:true, 
+            data: category,
+        });
+    }catch(err){
+        next(err);      
+    }
+
 };
