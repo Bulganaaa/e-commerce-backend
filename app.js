@@ -24,7 +24,7 @@ app.use(express.json());
 // app.use(morgan("dev"));
 
 
-// app.use(logger);
+app.use(logger);
 app.use('/api/v1/products',productsRoutes);
 app.use('/api/v1/categories',categoriesRoutes);
 app.use(errorHandler);
