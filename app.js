@@ -35,7 +35,7 @@ const server = app.listen(
     console.log(`Express server is running on port ${process.env.PORT}...`.inverse.bold));
 
 process.on('unhandledRejection', (err, promise) => {
-    console.log(`ALDAA GARLAA: ${err.messase}`.underline.red.bold);
+    console.log(`ALDAA GARLAA: ${err}`.underline.red.bold);
     server.close(() => {
         process.exit(1);
     });

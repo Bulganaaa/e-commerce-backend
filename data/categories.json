@@ -1,0 +1,26 @@
+[
+    {
+      "name": "Men",
+      "photo": "men-category.jpg"
+    },
+    {
+      "name": "Women",
+      "photo": "women-category.jpg"
+    },
+    {
+      "name": "Kids",
+      "photo": "kids-category.jpg"
+    },
+    {
+      "name": "Accessories",
+      "photo": "accessories-category.jpg"
+    },
+    {
+      "name": "Shoes",
+      "photo": "shoes-category.jpg"
+    },
+    {
+      "name": "Sale",
+      "photo": "sale-category.jpg"
+    }
+  ]
