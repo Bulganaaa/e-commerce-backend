@@ -8,14 +8,13 @@ const connectDB = require('./config/db');
 const colors = require('colors');
 const errorHandler = require('./middleware/error');
 const categoriesRoutes = require('./routes/categories');
+const productsRoutes = require ('./routes/products');
 //app iin tohirgoog process.env ruu achaallah
 dotenv.config({ path: './config/config.env' });
 
 connectDB();
 
 //route oruulj ireh
-
-
 const app = express();
 //Body parser
 app.use(express.json());
@@ -26,6 +25,7 @@ app.use(express.json());
 
 
 // app.use(logger);
+app.use('/api/v1/products',productsRoutes);
 app.use('/api/v1/categories',categoriesRoutes);
 app.use(errorHandler);
 

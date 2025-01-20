@@ -1,6 +1,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const Category = require('./models/categoriesmod');
+const Product = require('./models/productsmod');
 const colors = require('colors');
 const dotenv = require('dotenv');
 
@@ -19,10 +20,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 const categories = JSON.parse(
     fs.readFileSync(__dirname + '/data/categories.json', 'utf-8')
 );
-
+const products = JSON.parse(
+    fs.readFileSync(__dirname + '/data/products.json', 'utf-8')
+);
 const importData = async () => {
     try {
         await Category.create(categories);
+        await Product.create(products);
         console.log('Data successfully imported'.cyan);
         process.exit();
     } catch (err) {
