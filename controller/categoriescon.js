@@ -4,6 +4,7 @@ const asyncHandler = require('../middleware/asyncHandler');
 
 exports.getCategories = asyncHandler(async (req, res, next) => {
     const categories = await Category.find();
+    const sort = req.query
     res.status(200).send({
         success: true,
         data: categories,
