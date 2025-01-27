@@ -3,7 +3,7 @@
     "name": "Men's T-Shirt",
     "description": "A comfortable and stylish men's t-shirt.",
     "price": 19.99,
-    "category": "60d21b4667d0d8992e610c85", 
+    "category": "6796f2defa097efacf5a1762", 
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Black", "White", "Blue"],
     "stock": 100,
@@ -28,7 +28,7 @@
     "name": "Women's Dress",
     "description": "An elegant dress perfect for any occasion.",
     "price": 49.99,
-    "category": "60d21b4667d0d8992e610c86", 
+    "category": "6796f2defa097efacf5a1763", 
     "sizes": ["S", "M", "L"],
     "colors": ["Red", "Green", "Blue"],
     "stock": 50,
@@ -48,5 +48,30 @@
       }
     ],
     "isFeatured": false
+  },
+  {
+    "name": "Kids' Hoodie",
+    "description": "A warm and cozy hoodie for kids.",
+    "price": 29.99,
+    "category": "6796f2defa097efacf5a1764", 
+    "sizes": ["XS", "S", "M"],
+    "colors": ["Pink", "Yellow", "Blue"],
+    "stock": 75,
+    "images": ["kids-hoodie1.jpg", "kids-hoodie2.jpg"],
+    "brand": "Brand C",
+    "rating": 4.7,
+    "reviews": [
+      {
+        "userId": "60d21b4667d0d8992e610c89",
+        "comment": "My kid loves it!",
+        "rating": 5
+      },
+      {
+        "userId": "60d21b4667d0d8992e610c90",
+        "comment": "Very warm and comfortable.",
+        "rating": 4.5
+      }
+    ],
+    "isFeatured": true
   }
 ]

@@ -19,20 +19,20 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
     // Create query string
     let queryStr = JSON.stringify(reqQuery);
 
-    // Finding resource
+  
     if (req.params.catid) {
         query = Product.find({ category: req.params.catid });
     } else {
         query = Product.find(JSON.parse(queryStr));
     }
 
-    // Select Fields
+    
     if (req.query.select) {
         const fields = req.query.select.split(',').join(' ');
         query = query.select(fields);
     }
 
-    // Sort
+
     if (req.query.sort) {
         const sortBy = req.query.sort.split(',').join(' ');
         query = query.sort(sortBy);
@@ -40,11 +40,12 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
         query = query.sort('-createdAt');
     }
 
-    // Executing query
+    
     const products = await query;
 
     res.status(200).send({
         success: true,
+        count: products.length,
         data: products,
     });
 });
