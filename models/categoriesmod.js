@@ -19,10 +19,17 @@ const CategorySchema = new mongoose.Schema({
     },
 });
 
-// Create category slug from the name
+
 CategorySchema.pre('save', function(next) {
     this.slug = slugify(this.name, { lower: true });
     next();
+});
+
+CategorySchema.pre('remove',  async function(next) {
+   console.log('removing...');
+    await this.model('Product').deleteMany({category : this.id});
+    next();
+
 });
 
 module.exports = mongoose.model("Category", CategorySchema);

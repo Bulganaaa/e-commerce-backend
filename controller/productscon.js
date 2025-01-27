@@ -7,31 +7,24 @@ const asyncHandler = require('../middleware/asyncHandler');
 exports.getProducts = asyncHandler(async (req, res, next) => {
     let query;
 
-    // Copy req.query
     const reqQuery = { ...req.query };
 
-    // Fields to exclude
     const removeFields = ['select', 'sort'];
 
-    // Loop over removeFields and delete them from reqQuery
     removeFields.forEach(param => delete reqQuery[param]);
 
-    // Create query string
     let queryStr = JSON.stringify(reqQuery);
 
-  
     if (req.params.catid) {
         query = Product.find({ category: req.params.catid });
     } else {
         query = Product.find(JSON.parse(queryStr));
     }
 
-    
     if (req.query.select) {
         const fields = req.query.select.split(',').join(' ');
         query = query.select(fields);
     }
-
 
     if (req.query.sort) {
         const sortBy = req.query.sort.split(',').join(' ');
@@ -40,7 +33,9 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
         query = query.sort('-createdAt');
     }
 
-    
+    // Populate category field
+    query = query.populate('category');
+
     const products = await query;
 
     res.status(200).send({
@@ -51,7 +46,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 });
 
 exports.getProduct = asyncHandler(async (req, res, next) => {
-    const product = await Product.findById(req.params.prodid);
+    const product = await Product.findById(req.params.prodid).populate('category');
     if (!product) {
         return next(new myError("Sorry this product doesn't exist", 400));
     }
@@ -73,7 +68,7 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
     const product = await Product.findByIdAndUpdate(req.params.prodid, req.body, {
         new: true,
         runValidators: true
-    });
+    }).populate('category');
     if (!product) {
         return next(new myError("Sorry this product doesn't exist", 400));
     }

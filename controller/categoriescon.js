@@ -45,10 +45,13 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
 });
 
 exports.deleteCategory = asyncHandler(async (req, res, next) => {
-    const category = await Category.findByIdAndDelete(req.params.catid);
+    const category = await Category.findById(req.params.catid);
     if (!category) {
         return next(new myError("Sorry this category doesn't exist", 400));
     }
+
+    category.remove();
+    
     res.status(200).send({
         success: true,
         data: category,
