@@ -23,6 +23,7 @@ const categories = JSON.parse(
 const products = JSON.parse(
     fs.readFileSync(__dirname + '/data/products.json', 'utf-8')
 );
+
 const importData = async () => {
     try {
         await Category.create(categories);
@@ -38,6 +39,7 @@ const importData = async () => {
 const deleteData = async () => {
     try {
         await Category.deleteMany();
+        await Product.deleteMany();
         console.log('All data successfully deleted'.yellow.inverse.bold);
         process.exit();
     } catch (err) {
@@ -51,6 +53,6 @@ if (process.argv[2] === 'imp') {
 } else if (process.argv[2] === 'del') {
     deleteData();
 } else {
-    console.log('Invalid command. Use "imp" to import data or "del" to delete data.'.red.underline);
+    console.log('Invalid command. Use "imp" to import data or "del" to delete data.'.red);
     process.exit(1);
 }

@@ -1,77 +1,52 @@
 [
-    {
-      "name": "Men's T-Shirt",
-      "description": "A comfortable and stylish men's t-shirt.",
-      "price": 19.99,
-      "category": "Men",
-      "sizes": ["S", "M", "L", "XL"],
-      "colors": ["Black", "White", "Blue"],
-      "stock": 100,
-      "images": ["mens-tshirt1.jpg", "mens-tshirt2.jpg"],
-      "brand": "Brand A",
-      "rating": 4.5,
-      "reviews": [
-        {
-          "userId": "60d21b4667d0d8992e610c85",
-          "comment": "Great quality!",
-          "rating": 5
-        },
-        {
-          "userId": "60d21b4667d0d8992e610c86",
-          "comment": "Very comfortable.",
-          "rating": 4
-        }
-      ],
-      "isFeatured": true
-    },
-    {
-      "name": "Women's Dress",
-      "description": "An elegant dress perfect for any occasion.",
-      "price": 49.99,
-      "category": "Women",
-      "sizes": ["S", "M", "L"],
-      "colors": ["Red", "Green", "Blue"],
-      "stock": 50,
-      "images": ["womens-dress1.jpg", "womens-dress2.jpg"],
-      "brand": "Brand B",
-      "rating": 4.8,
-      "reviews": [
-        {
-          "userId": "60d21b4667d0d8992e610c87",
-          "comment": "Beautiful dress!",
-          "rating": 5
-        },
-        {
-          "userId": "60d21b4667d0d8992e610c88",
-          "comment": "Fits perfectly.",
-          "rating": 4.5
-        }
-      ],
-      "isFeatured": false
-    },
-    {
-      "name": "Kids' Hoodie",
-      "description": "A warm and cozy hoodie for kids.",
-      "price": 29.99,
-      "category": "Kids",
-      "sizes": ["XS", "S", "M"],
-      "colors": ["Pink", "Yellow", "Blue"],
-      "stock": 75,
-      "images": ["kids-hoodie1.jpg", "kids-hoodie2.jpg"],
-      "brand": "Brand C",
-      "rating": 4.7,
-      "reviews": [
-        {
-          "userId": "60d21b4667d0d8992e610c89",
-          "comment": "My kid loves it!",
-          "rating": 5
-        },
-        {
-          "userId": "60d21b4667d0d8992e610c90",
-          "comment": "Very warm and comfortable.",
-          "rating": 4.5
-        }
-      ],
-      "isFeatured": true
-    }
-  ]
+  {
+    "name": "Men's T-Shirt",
+    "description": "A comfortable and stylish men's t-shirt.",
+    "price": 19.99,
+    "category": "60d21b4667d0d8992e610c85", 
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "White", "Blue"],
+    "stock": 100,
+    "images": ["mens-tshirt1.jpg", "mens-tshirt2.jpg"],
+    "brand": "Brand A",
+    "rating": 4.5,
+    "reviews": [
+      {
+        "userId": "60d21b4667d0d8992e610c85",
+        "comment": "Great quality!",
+        "rating": 5
+      },
+      {
+        "userId": "60d21b4667d0d8992e610c86",
+        "comment": "Very comfortable.",
+        "rating": 4
+      }
+    ],
+    "isFeatured": true
+  },
+  {
+    "name": "Women's Dress",
+    "description": "An elegant dress perfect for any occasion.",
+    "price": 49.99,
+    "category": "60d21b4667d0d8992e610c86", 
+    "sizes": ["S", "M", "L"],
+    "colors": ["Red", "Green", "Blue"],
+    "stock": 50,
+    "images": ["womens-dress1.jpg", "womens-dress2.jpg"],
+    "brand": "Brand B",
+    "rating": 4.8,
+    "reviews": [
+      {
+        "userId": "60d21b4667d0d8992e610c87",
+        "comment": "Beautiful dress!",
+        "rating": 5
+      },
+      {
+        "userId": "60d21b4667d0d8992e610c88",
+        "comment": "Fits perfectly.",
+        "rating": 4.5
+      }
+    ],
+    "isFeatured": false
+  }
+]

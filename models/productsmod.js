@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
-
+const {transliterate, slugify} = require('transliteration');
 const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
       trim: true,
+      unique: true,
     },
     description: {
       type: String,
       required: true,
       trim: true,
+      maxlength: 500,
     },
     price: {
       type: Number,
@@ -18,9 +20,9 @@ const productSchema = new mongoose.Schema(
       min: 0,
     },
     category: {
-      type: String,
+      type: mongoose.Schema.ObjectId,
       required: true,
-      enum: ['Men', 'Women', 'Kids', 'Accessories'], // Example categories
+      ref: 'Category', 
     },
     sizes: {
       type: [String],
@@ -72,5 +74,11 @@ const productSchema = new mongoose.Schema(
   },
   { timestamps: true } // Adds createdAt and updatedAt automatically
 );
+
+productSchema.pre('save', function(next) {
+   //name horvuuleh
+    this.slug = slugify(this.name, { lower: true });
+    next();
+});
 
 module.exports = mongoose.model('Product', productSchema);
