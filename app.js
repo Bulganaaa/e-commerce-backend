@@ -9,7 +9,7 @@ const colors = require('colors');
 const errorHandler = require('./middleware/error');
 const categoriesRoutes = require('./routes/categories');
 const productsRoutes = require('./routes/products');
-
+const fileupload = require('express-fileupload');
 // Load environment variables
 dotenv.config({ path: './config/config.env' });
 
@@ -29,6 +29,8 @@ app.use(express.json());
 
 // Use logger middleware
 app.use(logger);
+//fileupload
+app.use(fileupload());
 
 // Mount routes
 app.use('/api/v1/products', productsRoutes);

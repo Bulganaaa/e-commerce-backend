@@ -1,16 +1,37 @@
-const express = require('express');
-const { getProduct, createProduct, getProducts, updateProduct, deleteProduct } = require('../controller/productscon');
+const express = require("express");
+const { protect, authorize } = require("../middleware/protect");
+
+const {
+  getProducts,
+  getProduct,
+  createProduct,
+  deleteProduct,
+  updateProduct,
+  uploadProductPhoto,
+} = require("../controller/productscon");
+
+const { getProductComments } = require("../controller/commentscon");
 
 const router = express.Router();
 
-// Correct the route path
-router.route('/')
-    .get(getProducts)
-    .post(createProduct);
+// "/api/v1/products"
+router
+  .route("/")
+  .get(getProducts)
+  .post(protect, authorize("admin", "operator"), createProduct);
 
-router.route('/:prodid')
-    .get(getProduct)
-    .put(updateProduct)
-    .delete(deleteProduct);
+router
+  .route("/:id")
+  .get(getProduct)
+  .put(protect, authorize("admin", "operator"), updateProduct)
+  .delete(protect, authorize("admin", "operator"), deleteProduct);
+
+router
+  .route("/:id/photo")
+  .put(protect, authorize("admin", "operator"), uploadProductPhoto);
+
+router
+  .route("/:id/comments")
+  .get(getProductComments);
 
 module.exports = router;

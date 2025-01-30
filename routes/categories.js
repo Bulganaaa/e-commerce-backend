@@ -1,20 +1,29 @@
-const express = require('express');
-
-const {getCategories, getCategory, updateCategory, createCategory, deleteCategory,} = require('../controller/categoriescon');
-const {getProducts} = require('../controller/productscon');
+const express = require("express");
 const router = express.Router();
+const { protect, authorize } = require("../middleware/protect");
 
-router.route('/')
-.get(getCategories)
-.post(createCategory);
+const {
+  getCategories,
+  getCategory,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} = require("../controller/categoriescon");
 
-router.route('/:catid')
-.get(getCategory)
-.put(updateCategory)
-.delete(deleteCategory);
+// api/v1/categories/:id/products
+const { getCategoryProducts } = require("../controller/productscon");
+router.route("/:categoryId/products").get(getCategoryProducts);
 
+// "/api/v1/categories"
+router
+  .route("/")
+  .get(getCategories)
+  .post(protect, authorize("admin"), createCategory);
 
-router.route('/:catid/products')
-.get(getProducts);
+router
+  .route("/:id")
+  .get(getCategory)
+  .put(protect, authorize("admin", "operator"), updateCategory)
+  .delete(protect, authorize("admin"), deleteCategory);
 
 module.exports = router;
