@@ -16,7 +16,6 @@ const CategorySchema = new mongoose.Schema(
     slug: String,
     description: {
       type: String,
-      required: [true, "Категорийн тайлбарыг заавал оруулах ёстой."],
       maxlength: [
         500,
         "Категорийн тайлбарын урт дээд тал нь 500 тэмдэгт байх ёстой.",

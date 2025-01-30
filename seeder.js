@@ -2,6 +2,7 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const Category = require('./models/categoriesmod');
 const Product = require('./models/productsmod');
+const User = require('./models/usersmod');
 const colors = require('colors');
 const dotenv = require('dotenv');
 
@@ -23,11 +24,14 @@ const categories = JSON.parse(
 const products = JSON.parse(
     fs.readFileSync(__dirname + '/data/products.json', 'utf-8')
 );
-
+const users = JSON.parse(
+    fs.readFileSync(__dirname + '/data/users.json', 'utf-8')
+);
 const importData = async () => {
     try {
         await Category.create(categories);
         await Product.create(products);
+        await User.create(users);
         console.log('Data successfully imported'.cyan);
         process.exit();
     } catch (err) {
@@ -40,6 +44,7 @@ const deleteData = async () => {
     try {
         await Category.deleteMany();
         await Product.deleteMany();
+        await User.deleteMany();
         console.log('All data successfully deleted'.yellow.inverse.bold);
         process.exit();
     } catch (err) {
