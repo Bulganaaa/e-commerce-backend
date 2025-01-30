@@ -39,8 +39,8 @@ const CategorySchema = new mongoose.Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-CategorySchema.virtual("books", {
-  ref: "Book",
+CategorySchema.virtual("products", {
+  ref: "Product",
   localField: "_id",
   foreignField: "category",
   justOne: false,
@@ -48,7 +48,7 @@ CategorySchema.virtual("books", {
 
 CategorySchema.pre("remove", async function (next) {
   console.log("removing ....");
-  await this.model("Book").deleteMany({ category: this._id });
+  await this.model("Product").deleteMany({ category: this._id });
   next();
 });
 

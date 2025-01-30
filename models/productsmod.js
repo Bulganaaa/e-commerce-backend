@@ -1,77 +1,99 @@
-const mongoose = require('mongoose');
-const { transliterate, slugify } = require('transliteration');
+const mongoose = require("mongoose");
+const { transliterate, slugify } = require("transliteration");
 
-const ProductSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: [true, "Please add a name for the product"],
-        trim: true,
-        maxlength: [100, "Name cannot be more than 100 characters"]
+      type: String,
+      required: [true, "Бүтээгдэхүүний нэрийг оруулна уу"],
+      unique: true,
+      trim: true,
+      maxlength: [250, "Бүтээгдэхүүний нэрний урт дээд тал нь 250 тэмдэгт байх ёстой."],
     },
-    description: {
-        type: String,
-        required: [true, "Please add a description for the product"]
-    },
-    price: {
-        type: Number,
-        required: [true, "Please add a price for the product"],
-        min: 0
-    },
-    category: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Category',
-        required: true
-    },
-    sizes: {
-        type: [String],
-        required: true,
-        enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
-    },
-    colors: {
-        type: [String],
-        required: true
-    },
-    stock: {
-        type: Number,
-        required: true,
-        min: 0
-    },
-    images: {
-        type: [String] // Array of image URLs
+    photo: {
+      type: String,
+      default: "no-photo.jpg",
     },
     brand: {
-        type: String,
-        required: true
+      type: String,
+      required: [true, "Брэндийн нэрийг оруулна уу"],
+      trim: true,
+      maxlength: [
+        50,
+        "Брэндийн нэрний урт дээд тал нь 50 тэмдэгт байх ёстой.",
+      ],
     },
-    rating: {
-        type: Number,
-        default: 0,
-        min: 0,
-        max: 5
+    averageRating: {
+      type: Number,
+      min: [1, "Рэйтинг хамгийн багадаа 1 байх ёстой"],
+      max: [10, "Рэйтинг хамгийн ихдээ 10 байх ёстой"],
     },
-    reviews: [
-        {
-            userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-            comment: String,
-            rating: { type: Number, min: 0, max: 5 }
-        }
-    ],
-    isFeatured: {
-        type: Boolean,
-        default: false
+    price: {
+      type: Number,
+      required: [true, "Бүтээгдэхүүний үнийг оруулна уу"],
+      min: [500, "Бүтээгдэхүүний үнэ хамгийн багадаа 500 төгрөг байх ёстой"],
     },
+    stock: Number,
+    description: {
+      type: String,
+      required: [true, "Бүтээгдэхүүний тайлбарыг оруулна уу"],
+      trim: true,
+      maxlength: [5000, "Бүтээгдэхүүний тайлбарын урт дээд тал нь 5000 тэмдэгт байх ёстой."],
+    },
+    bestseller: {
+      type: Boolean,
+      default: false,
+    },
+    availableSizes: [String],
+
+    category: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Category",
+      required: true,
+    },
+
+    createUser: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
+
+    updateUser: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
+
     createdAt: {
-        type: Date,
-        default: Date.now
+      type: Date,
+      default: Date.now,
     },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
-}, 
+  },
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
 
-{ timestamps: true });
+ProductSchema.statics.computeCategoryAveragePrice = async function (catId) {
+  const obj = await this.aggregate([
+    { $match: { category: catId } },
+    { $group: { _id: "$category", avgPrice: { $avg: "$price" } } },
+  ]);
 
+  console.log(obj);
+  let avgPrice = null;
 
+  if (obj.length > 0) avgPrice = obj[0].avgPrice;
 
-module.exports = mongoose.model('Product', ProductSchema);
+  await this.model("Category").findByIdAndUpdate(catId, {
+    averagePrice: avgPrice,
+  });
+
+  return obj;
+};
+
+ProductSchema.post("save", function () {
+  this.constructor.computeCategoryAveragePrice(this.category);
+});
+
+ProductSchema.post("remove", function () {
+  this.constructor.computeCategoryAveragePrice(this.category);
+});
+
+module.exports = mongoose.model("Product", ProductSchema);

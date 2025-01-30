@@ -14,8 +14,8 @@ const {
   logout,
 } = require("../controller/userscon");
 
-const { getUserBooks } = require("../controller/books");
-const { getUserComments } = require("../controller/comments");
+const { getUserProducts } = require("../controller/productscon");
+const { getUserComments } = require("../controller/commentscon");
 
 const router = express.Router();
 
@@ -41,8 +41,8 @@ router
   .delete(authorize("admin"), deleteUser);
 
 router
-  .route("/:id/books")
-  .get(authorize("admin", "operator", "user"), getUserBooks);
+  .route("/:id/products")
+  .get(authorize("admin", "operator", "user"), getUserProducts);
 
 router.route("/:id/comments").get(getUserComments);
 

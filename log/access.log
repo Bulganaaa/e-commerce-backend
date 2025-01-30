@@ -1,0 +1,5 @@
+::1 - - [30/Jan/2025:07:14:20 +0000] "GET /api/v1/categories/679b220be09558f425bd5421 HTTP/1.1" 400 95 "-" "PostmanRuntime/7.43.0"
+::1 - - [30/Jan/2025:07:14:27 +0000] "GET /api/v1/categories/ HTTP/1.1" 200 1393 "-" "PostmanRuntime/7.43.0"
+::1 - - [30/Jan/2025:07:14:35 +0000] "GET /api/v1/categories/5e90434cd433fa11b078ed8a HTTP/1.1" 500 111 "-" "PostmanRuntime/7.43.0"
+::1 - - [30/Jan/2025:07:16:01 +0000] "GET /api/v1/categories/5e90434cd433fa11b078ed8a HTTP/1.1" 500 111 "-" "PostmanRuntime/7.43.0"
+::1 - - [30/Jan/2025:07:16:39 +0000] "GET /api/v1/categories/5e90434cd433fa11b078ed8a HTTP/1.1" 500 114 "-" "PostmanRuntime/7.43.0"

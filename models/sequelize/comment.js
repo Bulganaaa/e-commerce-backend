@@ -18,11 +18,11 @@ module.exports = function (sequelize, DataTypes) {
             key: "id",
           },
         },
-        bookId: {
+        productId: {
           type: DataTypes.INTEGER(10).UNSIGNED,
           allowNull: false,
           references: {
-            model: "book",
+            model: "product",
             key: "id",
           },
         },

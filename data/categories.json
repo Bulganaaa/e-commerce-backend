@@ -1,26 +1,34 @@
 [
-    {
-      "name": "Men",
-      "photo": "men-category.jpg"
-    },
-    {
-      "name": "Women",
-      "photo": "women-category.jpg"
-    },
-    {
-      "name": "Kids",
-      "photo": "kids-category.jpg"
-    },
-    {
-      "name": "Accessories",
-      "photo": "accessories-category.jpg"
-    },
-    {
-      "name": "Shoes",
-      "photo": "shoes-category.jpg"
-    },
-    {
-      "name": "Sale",
-      "photo": "sale-category.jpg"
-    }
-  ]
+  {
+    "photo": "mens_clothing.jpg",
+    "_id": "5e90434cd433fa11b078ed8a",
+    "name": "Men's Clothing",
+    "description": "Explore a wide range of men's clothing including shirts, pants, and jackets.",
+    "createdAt": "2020-04-10T09:58:36.412Z",
+    "__v": 0
+  },
+  {
+    "photo": "womens_clothing.jpg",
+    "_id": "5e90478549941f52dcb01b34",
+    "name": "Women's Clothing",
+    "description": "Discover the latest trends in women's clothing including dresses, tops, and skirts.",
+    "createdAt": "2020-04-10T10:16:37.620Z",
+    "__v": 0
+  },
+  {
+    "photo": "accessories.jpg",
+    "_id": "5e9047fd49941f52dcb01b35",
+    "name": "Accessories",
+    "description": "Find the perfect accessories to complement your outfit, including bags, belts, and hats.",
+    "createdAt": "2020-04-10T10:18:37.155Z",
+    "__v": 0
+  },
+  {
+    "photo": "footwear.jpg",
+    "_id": "5e96cc1ba816c94e009a9c9e",
+    "name": "Footwear",
+    "description": "Shop for the latest styles in footwear including sneakers, boots, and sandals.",
+    "createdAt": "2020-04-15T08:55:55.037Z",
+    "__v": 0
+  }
+]

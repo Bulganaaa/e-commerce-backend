@@ -55,7 +55,7 @@ exports.getComment = asyncHandler(async (req, res, next) => {
     }
   );
 
-  result[0].comment = "Ёстой гоё ном!";
+  result[0].comment = "Ёстой гоё бүтээгдэхүүн!";
   result[0].save();
 
   const [uResult, uMeta] = await req.db.sequelize.query(
@@ -68,7 +68,7 @@ exports.getComment = asyncHandler(async (req, res, next) => {
     uResult,
     uMeta,
     user: await comment.getUser(),
-    book: await comment.getBook(),
+    product: await comment.getProduct(),
     data: comment,
   });
 });
@@ -135,16 +135,16 @@ exports.getUserComments = asyncHandler(async (req, res, next) => {
 
 // Eager loading
 exports.getProductComments = asyncHandler(async (req, res, next) => {
-  let book = await req.db.book.findByPk(req.params.id, {
+  let product = await req.db.product.findByPk(req.params.id, {
     include: req.db.comment,
   });
 
-  if (!book) {
-    throw new MyError(`${req.params.id} id тэй ном олдсонгүй.`, 400);
+  if (!product) {
+    throw new MyError(`${req.params.id} id тэй бүтээгдэхүүн олдсонгүй.`, 400);
   }
 
   res.status(200).json({
     success: true,
-    book,
+    product,
   });
 });

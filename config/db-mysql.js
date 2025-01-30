@@ -25,7 +25,7 @@ const sequelize = new Sequelize(
 );
 
 const models = [
-  require("../models/sequelize/book"),
+  require("../models/sequelize/product"),
   require("../models/sequelize/user"),
   require("../models/sequelize/category"),
   require("../models/sequelize/comment"),
@@ -37,5 +37,4 @@ models.forEach((model) => {
 });
 
 db.sequelize = sequelize;
-
 module.exports = db;
