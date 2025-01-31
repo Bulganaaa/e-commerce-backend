@@ -58,8 +58,6 @@ var corsOptions = {
   credentials: true,
 };
 
-// index.html-ийг public хавтас дотроос ол гэсэн тохиргоо
-app.use(express.static(path.join(__dirname, "public")));
 
 // Express rate limit : Дуудалтын тоог хязгаарлана
 const limiter = rateLimit({
@@ -72,7 +70,7 @@ app.use(limiter);
 app.use(hpp());
 // Cookie байвал req.cookie рүү оруулж өгнө0
 app.use(cookieParser());
-// Бидний бичсэн логгер
+//логгер
 app.use(logger);
 // Body дахь өгөгдлийг Json болгож өгнө
 app.use(express.json());
@@ -127,7 +125,7 @@ db.sequelize
 // express сэрвэрийг асаана.
 const server = app.listen(
   process.env.PORT,
-  console.log(`Express сэрвэр ${process.env.PORT} порт дээр аслаа... `.rainbow)
+  console.log(`Express сэрвэр ${process.env.PORT} порт дээр аслаа... `.green.bold.inverse)
 );
 
 // Баригдалгүй цацагдсан бүх алдаануудыг энд барьж авна
